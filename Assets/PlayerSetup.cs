@@ -21,9 +21,5 @@ public class PlayerSetup : NetworkBehaviour
                     behaviour.enabled = false;
             }
         }
-        else
-        {
-            Camera.main.GetComponent<Follow>().target = transform;
-        }
     }
 }

@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Mirror;
+using UnityEngine.Networking;
 
-public class move : MonoBehaviour
+public class move : NetworkBehaviour
 {
     #region Variables
     [Range(-1, 1)]
@@ -25,16 +28,23 @@ public class move : MonoBehaviour
     private Rigidbody2D rb;
     #endregion    
 
+    [SerializeField]
+    private GameObject finishUI;
+    [SerializeField]
+    private Text finishTime;
+    private float time;
+
+    [SerializeField]
+    private GameObject[] spawnPoints;
+
     public void FixedUpdate()
     {
+        time += Time.deltaTime;
+
             if(currentSpeed != 0)
             {
                 transform.Rotate(Vector3.back * turnSpeed * Time.deltaTime * Horizontale);
             }
-            
-            
-
-
 
             if(Verticale != Mathf.Sign(currentSpeed) && currentSpeed != 0 && Verticale != 0)
             {
@@ -65,5 +75,29 @@ public class move : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Finish"))
+        {
+            finishUI.SetActive(true);
+            finishTime.text = Mathf.RoundToInt(time) + "s";
+        }
+    }
 
+    IEnumerator HideUI()
+    {
+        int playerID = int.Parse(GetComponent<NetworkIdentity>().netId);
+
+        GetComponent<move>().enabled = false;
+        yield return new WaitForSeconds(3f);
+        GetComponent<move>().enabled = true;
+
+        for (int i = 0; i < length; i++)
+        {
+
+        }
+
+        time = 0;
+        finishUI.SetActive(false);
+    }
 }

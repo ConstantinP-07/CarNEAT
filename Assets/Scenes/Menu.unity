@@ -814,7 +814,7 @@ MonoBehaviour:
   serverBatching: 0
   serverBatchInterval: 0
   offlineScene: Assets/Scenes/Menu.unity
-  onlineScene: Assets/Scenes/MenuAndOptions.unity
+  onlineScene: Assets/Map 1.unity
   transport: {fileID: 855877253}
   networkAddress: localhost
   maxConnections: 6
@@ -824,7 +824,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 650617700385178133, guid: a7c9048701d307f4f90a81125ca8e2d4,
     type: 3}
   autoCreatePlayer: 1
-  playerSpawnMethod: 0
+  playerSpawnMethod: 1
   spawnPrefabs: []
 --- !u!4 &855877255
 Transform:
