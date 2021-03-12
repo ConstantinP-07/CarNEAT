@@ -6,14 +6,16 @@ using UnityEngine;
 public class Follow : MonoBehaviour
 {
 
-    [SerializeField]
-    private Transform target;
+    public Transform target;
 
     [SerializeField]
     private float smoothSpeed = 2f;
 
     void FixedUpdate()
     {
+        if (target == null)
+            return;
+
         Vector3 smoothedMove = Vector3.Lerp(transform.position, target.position, smoothSpeed * Time.deltaTime);
         smoothedMove = new Vector3(smoothedMove.x, smoothedMove.y, -10);
 
